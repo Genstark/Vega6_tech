@@ -1,1 +1,0 @@
-# Vega6_tech
