@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // MongoDB setup
-const uri = process.env.MONGO_KEY || "mongodb+srv://gy523314:%40genwarrior123%40@cluster0.3e0eraj.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGO_KEY;
 const client = new MongoClient(uri);
 let db;
 
