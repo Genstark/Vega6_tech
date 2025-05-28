@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import BlogCard from '../components/BlogCard';
+import axios from '../axios';
 
 const BlogList = () => {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        fetch('/api/blogs')
-            .then(res => res.json())
-            .then(data => setBlogs(data));
+        (async () => {
+            const response = await axios.get('/blogs');
+            setBlogs(response.data);
+        })();
     }, []);
 
     const handleView = (blog) => {
@@ -18,8 +20,18 @@ const BlogList = () => {
         console.log('Editing:', blog);
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         console.log('Deleting:', id);
+        try {
+            await axios.delete(`/blogs/${id}`, {
+                headers: {
+                    Authorization: localStorage.getItem('token'),
+                },
+            });
+            setBlogs(blogs.filter((blog) => blog._id !== id));
+        } catch (error) {
+            console.error('Delete failed:', error);
+        }
     };
 
     return (

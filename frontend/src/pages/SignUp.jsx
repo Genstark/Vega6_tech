@@ -15,7 +15,7 @@ function SignUp() {
 
         await axios.post('/auth/signup', data);
         alert('Signup successful');
-        navigate('/login');
+        navigate('/');
     };
 
     return (

@@ -23,8 +23,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // MongoDB setup
-const uri = process.env.MONGO_KEY;
-const client = new MongoClient(Decrypt(uri));
+const uri = process.env.MONGO_KEY || "mongodb+srv://gy523314:%40genwarrior123%40@cluster0.3e0eraj.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
 let db;
 
 client.connect().then(() => {
@@ -101,7 +101,7 @@ app.post('/api/blogs', verifyToken, upload.single('image'), async (req, res) => 
 // Get all blogs
 app.get('/api/blogs', async (req, res) => {
     const blogs = await db.collection('blogs').find().toArray();
-    res.json(blogs);
+    res.status(200).json(blogs);
 });
 
 // Get single blog
