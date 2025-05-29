@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../axios';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetch = async () => {
@@ -25,6 +27,9 @@ function Dashboard() {
                 width={100}
                 style={{ float: 'right', borderRadius: '50%' }}
             />
+            <button onClick={() => navigate('/blogs')} style={{ marginTop: 20 }}>
+                Go to Blog List
+            </button>
         </>
     );
 }
