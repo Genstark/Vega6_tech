@@ -2,10 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from '../axios';
 
-const BlogView = () => {
-    const { id } = useParams();
-    const [blog, setBlog] = useState(null);
-    const [loading, setLoading] = useState(true);
+interface Blog {
+    _id: string;
+    title: string;
+    author: string;
+    image?: string;
+    content: string;
+    // Add other fields if needed
+}
+
+const BlogView: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    const [blog, setBlog] = useState<Blog | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         (async () => {

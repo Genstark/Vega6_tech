@@ -2,8 +2,16 @@ import React, { useEffect, useState } from 'react';
 import BlogCard from '../components/BlogCard';
 import axios from '../axios';
 
-const BlogList = () => {
-    const [blogs, setBlogs] = useState([]);
+interface Blog {
+    _id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    // Add other fields if needed
+}
+
+const BlogList: React.FC = () => {
+    const [blogs, setBlogs] = useState<Blog[]>([]);
 
     useEffect(() => {
         (async () => {
@@ -12,20 +20,20 @@ const BlogList = () => {
         })();
     }, []);
 
-    const handleView = (blog) => {
+    const handleView = (blog: Blog) => {
         console.log('Viewing:', blog);
     };
 
-    const handleEdit = (blog) => {
+    const handleEdit = (blog: Blog) => {
         console.log('Editing:', blog);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id: string) => {
         console.log('Deleting:', id);
         try {
             await axios.delete(`/blogs/${id}`, {
                 headers: {
-                    Authorization: localStorage.getItem('token'),
+                    Authorization: localStorage.getItem('token') || '',
                 },
             });
             setBlogs(blogs.filter((blog) => blog._id !== id));

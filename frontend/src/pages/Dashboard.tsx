@@ -2,8 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from '../axios';
 import { useNavigate } from 'react-router-dom';
 
-function Dashboard() {
-    const [user, setUser] = useState(null);
+interface User {
+    email: string;
+    profileImage?: string;
+    // Add other fields if needed
+}
+
+const Dashboard: React.FC = () => {
+    const [user, setUser] = useState<User | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,6 +38,6 @@ function Dashboard() {
             </button>
         </>
     );
-}
+};
 
 export default Dashboard;

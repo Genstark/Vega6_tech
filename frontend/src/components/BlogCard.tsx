@@ -1,6 +1,21 @@
 import React from "react";
 
-const BlogCard = ({ blog, onView, onEdit, onDelete }) => {
+interface Blog {
+    _id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    // Add other fields if needed
+}
+
+interface BlogCardProps {
+    blog: Blog;
+    onView: (blog: Blog) => void;
+    onEdit: (blog: Blog) => void;
+    onDelete: (id: string) => void;
+}
+
+const BlogCard: React.FC<BlogCardProps> = ({ blog, onView, onEdit, onDelete }) => {
     return (
         <div className="blog-card">
             <img src={blog.imageUrl} alt={blog.title} className="blog-img" />
