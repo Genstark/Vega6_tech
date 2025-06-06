@@ -24,7 +24,7 @@ const upload = multer({ storage });
 
 // MongoDB setup
 const uri = process.env.MONGO_KEY;
-const client = new MongoClient(Decrypt(uri));
+const client = new MongoClient(uri);
 let db;
 
 client.connect().then(() => {
@@ -76,13 +76,13 @@ app.post('/api/auth/login', async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret123');
-    res.json({ token, user });
+    res.status(200).json({ token, user });
 });
 
 // Get current user
 app.get('/api/auth/me', verifyToken, async (req, res) => {
     const user = await db.collection('users').findOne({ _id: new ObjectId(req.userId) });
-    res.json(user);
+    res.status(200).json(user);
 });
 
 // Create Blog
@@ -107,7 +107,7 @@ app.get('/api/blogs', async (req, res) => {
 // Get single blog
 app.get('/api/blogs/:id', async (req, res) => {
     const blog = await db.collection('blogs').findOne({ _id: new ObjectId(req.params.id) });
-    res.json(blog);
+    res.status(200).json(blog);
 });
 
 // Update blog
