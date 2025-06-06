@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BlogCard from '../components/BlogCard';
+import axios from '../axios';
 
 interface Blog {
     _id: string;
@@ -13,11 +14,6 @@ const BlogList: React.FC = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
 
     useEffect(() => {
-<<<<<<< HEAD:frontend/src/pages/BlogList.jsx
-        fetch('/api/blogs')
-            .then(res => res.json())
-            .then(data => setBlogs(data));
-=======
         (async () => {
             const response = await axios.get('/blogs');
             setBlogs(response.data);
@@ -27,7 +23,6 @@ const BlogList: React.FC = () => {
             setBlogs([]);
             console.log('Cleanup: BlogList component unmounted');
         };
->>>>>>> 51bbbef (few change):frontend/src/pages/BlogList.tsx
     }, []);
 
     const handleView = (blog: Blog) => {
@@ -38,10 +33,6 @@ const BlogList: React.FC = () => {
         console.log('Editing:', blog);
     };
 
-<<<<<<< HEAD:frontend/src/pages/BlogList.jsx
-    const handleDelete = (id) => {
-        console.log('Deleting:', id);
-=======
     const handleDelete = async (id: string) => {
         console.log('Deleting:', id);
         try {
@@ -54,7 +45,6 @@ const BlogList: React.FC = () => {
         } catch (error) {
             console.error('Delete failed:', error);
         }
->>>>>>> 51bbbef (few change):frontend/src/pages/BlogList.tsx
     };
 
     return (
