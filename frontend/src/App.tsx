@@ -5,6 +5,7 @@ import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import AddBlog from './pages/AddBlog';
 import BlogList from './pages/BlogList';
+import BlogView from './pages/BlogView';
 
 function App() {
 	return (

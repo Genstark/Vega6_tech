@@ -101,7 +101,7 @@ app.post('/api/blogs', verifyToken, upload.single('image'), async (req, res) => 
 // Get all blogs
 app.get('/api/blogs', async (req, res) => {
     const blogs = await db.collection('blogs').find().toArray();
-    res.json(blogs);
+    res.status(200).json(blogs);
 });
 
 // Get single blog
